@@ -7,4 +7,14 @@ layout:
 - go.kubebuilder.io/v4
 projectName: pf-sense-operator
 repo: github.com/vnedkov/pf-sense-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: lab.nedkoff.com
+  group: pfsense
+  kind: DNSResolverHostOverride
+  path: github.com/vnedkov/pf-sense-operator/api/v1beta1
+  version: v1beta1
 version: "3"

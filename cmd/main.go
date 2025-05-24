@@ -36,6 +36,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/metrics/filters"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
+
+	pfsensev1beta1 "github.com/vnedkov/pf-sense-operator/api/v1beta1"
+	"github.com/vnedkov/pf-sense-operator/internal/controller"
+	webhookpfsensev1beta1 "github.com/vnedkov/pf-sense-operator/internal/webhook/v1beta1"
 	// +kubebuilder:scaffold:imports
 )
 
@@ -47,6 +51,7 @@ var (
 func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
+	utilruntime.Must(pfsensev1beta1.AddToScheme(scheme))
 	// +kubebuilder:scaffold:scheme
 }
 
@@ -198,6 +203,20 @@ func main() {
 		os.Exit(1)
 	}
 
+	if err = (&controller.DNSResolverHostOverrideReconciler{
+		Client: mgr.GetClient(),
+		Scheme: mgr.GetScheme(),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "DNSResolverHostOverride")
+		os.Exit(1)
+	}
+	// nolint:goconst
+	if os.Getenv("ENABLE_WEBHOOKS") != "false" {
+		if err = webhookpfsensev1beta1.SetupDNSResolverHostOverrideWebhookWithManager(mgr); err != nil {
+			setupLog.Error(err, "unable to create webhook", "webhook", "DNSResolverHostOverride")
+			os.Exit(1)
+		}
+	}
 	// +kubebuilder:scaffold:builder
 
 	if metricsCertWatcher != nil {

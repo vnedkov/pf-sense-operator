@@ -1,0 +1,13 @@
+apiVersion: pfsense.lab.nedkoff.com/v1beta1
+kind: DNSResolverHostOverride
+metadata:
+  labels:
+    app.kubernetes.io/name: pf-sense-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: dnsresolverhostoverride-sample
+spec:
+  host: "sample"
+  domain: "home.nedkoff.com"
+  descr: "Sample DNS Resolver Host Override"
+
+  service: cilium-gateway-foodfinder-api-gateway

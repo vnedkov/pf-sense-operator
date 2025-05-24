@@ -39,6 +39,7 @@ import (
 
 	pfsensev1beta1 "github.com/vnedkov/pf-sense-operator/api/v1beta1"
 	"github.com/vnedkov/pf-sense-operator/internal/controller"
+	webhookpfsensev1beta1 "github.com/vnedkov/pf-sense-operator/internal/webhook/v1beta1"
 	// +kubebuilder:scaffold:imports
 )
 
@@ -208,6 +209,13 @@ func main() {
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "DNSResolverHostOverride")
 		os.Exit(1)
+	}
+	// nolint:goconst
+	if os.Getenv("ENABLE_WEBHOOKS") != "false" {
+		if err = webhookpfsensev1beta1.SetupDNSResolverHostOverrideWebhookWithManager(mgr); err != nil {
+			setupLog.Error(err, "unable to create webhook", "webhook", "DNSResolverHostOverride")
+			os.Exit(1)
+		}
 	}
 	// +kubebuilder:scaffold:builder
 

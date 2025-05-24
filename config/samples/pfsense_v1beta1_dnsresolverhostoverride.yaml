@@ -6,4 +6,8 @@ metadata:
     app.kubernetes.io/managed-by: kustomize
   name: dnsresolverhostoverride-sample
 spec:
-  # TODO(user): Add fields here
+  host: "sample"
+  domain: "home.nedkoff.com"
+  descr: "Sample DNS Resolver Host Override"
+
+  service: cilium-gateway-foodfinder-api-gateway

@@ -1,11 +1,32 @@
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  labels:
-    app.kubernetes.io/name: pf-sense-operator
-    app.kubernetes.io/managed-by: kustomize
   name: manager-role
 rules:
-- apiGroups: [""]
-  resources: ["pods"]
-  verbs: ["get", "list", "watch"]
+- apiGroups:
+  - pfsense.lab.nedkoff.com
+  resources:
+  - dnsresolverhostoverrides
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - pfsense.lab.nedkoff.com
+  resources:
+  - dnsresolverhostoverrides/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - pfsense.lab.nedkoff.com
+  resources:
+  - dnsresolverhostoverrides/status
+  verbs:
+  - get
+  - patch
+  - update

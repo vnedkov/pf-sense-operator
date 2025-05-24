@@ -17,6 +17,7 @@ limitations under the License.
 package v1beta1
 
 import (
+	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -29,13 +30,42 @@ type DNSResolverHostOverrideSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of DNSResolverHostOverride. Edit dnsresolverhostoverride_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	Host   string `json:"host" yaml:"host"`
+	Domain string `json:"domain" yaml:"domain"`
+
+	//+optional
+	Description string `json:"descr,omitempty" yaml:"descr,omitempty"`
+	//+optional
+	Aliases *[]DNSResolverHostOverrideAlias `json:"aliases,omitempty" yaml:"aliases,omitempty"`
+	Service string                          `json:"service,omitempty" yaml:"service,omitempty"`
+}
+
+// DNSResolverHostOverrideAlias defines an alias (CNAME record) for the host override.
+type DNSResolverHostOverrideAlias struct {
+	Host   string `json:"host" yaml:"host"`
+	Domain string `json:"domain" yaml:"domain"`
+	//+optional
+	Description string `json:"descr,omitempty" yaml:"descr,omitempty"`
 }
 
 // DNSResolverHostOverrideStatus defines the observed state of DNSResolverHostOverride.
 type DNSResolverHostOverrideStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+
+	// A reference to the service that created the .
+	// +optional
+	Service corev1.ObjectReference `json:"active,omitempty"`
+	// Information when the last time the job was run.
+	// +optional
+	LastRun *metav1.Time `json:"lastRun,omitempty"`
+	// Information when the last time the job successfully finished.
+	// +optional
+	LastSuccessfulRun *metav1.Time `json:"lastSuccessfulRun,omitempty"`
+
+	// Id of the external resource being managed
+	// +optional
+	ExternalID string `json:"externalId,omitempty"`
 }
 
 // +kubebuilder:object:root=true

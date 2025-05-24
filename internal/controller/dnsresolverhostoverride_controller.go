@@ -47,9 +47,10 @@ type DNSResolverHostOverrideReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.20.4/pkg/reconcile
 func (r *DNSResolverHostOverrideReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = logf.FromContext(ctx)
-
+	log := logf.FromContext(ctx)
 	// TODO(user): your logic here
+
+	log.Info("Reconciling DNSResolverHostOverride")
 
 	return ctrl.Result{}, nil
 }

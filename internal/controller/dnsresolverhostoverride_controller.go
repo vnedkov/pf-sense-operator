@@ -33,9 +33,9 @@ type DNSResolverHostOverrideReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-// +kubebuilder:rbac:groups=pfsense.lab.nedkoff.com,resources=dnsresolverhostoverrides,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=pfsense.lab.nedkoff.com,resources=dnsresolverhostoverrides/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=pfsense.lab.nedkoff.com,resources=dnsresolverhostoverrides/finalizers,verbs=update
+// +kubebuilder:rbac:groups=pfsense.nedkoff.com,resources=dnsresolverhostoverrides,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=pfsense.nedkoff.com,resources=dnsresolverhostoverrides/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=pfsense.nedkoff.com,resources=dnsresolverhostoverrides/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

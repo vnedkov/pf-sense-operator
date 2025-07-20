@@ -5,7 +5,7 @@ metadata:
   name: manager-role
 rules:
 - apiGroups:
-  - pfsense.lab.nedkoff.com
+  - pfsense.nedkoff.com
   resources:
   - dnsresolverhostoverrides
   verbs:
@@ -17,13 +17,13 @@ rules:
   - update
   - watch
 - apiGroups:
-  - pfsense.lab.nedkoff.com
+  - pfsense.nedkoff.com
   resources:
   - dnsresolverhostoverrides/finalizers
   verbs:
   - update
 - apiGroups:
-  - pfsense.lab.nedkoff.com
+  - pfsense.nedkoff.com
   resources:
   - dnsresolverhostoverrides/status
   verbs:

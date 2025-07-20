@@ -15,7 +15,7 @@ webhooks:
   name: mdnsresolverhostoverride-v1beta1.kb.io
   rules:
   - apiGroups:
-    - pfsense.lab.nedkoff.com
+    - pfsense.nedkoff.com
     apiVersions:
     - v1beta1
     operations:
@@ -41,7 +41,7 @@ webhooks:
   name: vdnsresolverhostoverride-v1beta1.kb.io
   rules:
   - apiGroups:
-    - pfsense.lab.nedkoff.com
+    - pfsense.nedkoff.com
     apiVersions:
     - v1beta1
     operations:

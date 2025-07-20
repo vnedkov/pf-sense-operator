@@ -1,4 +1,4 @@
-apiVersion: pfsense.lab.nedkoff.com/v1beta1
+apiVersion: pfsense.nedkoff.com/v1beta1
 kind: DNSResolverHostOverride
 metadata:
   labels:

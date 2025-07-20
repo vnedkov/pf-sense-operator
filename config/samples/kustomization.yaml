@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- pfsense_v1beta1_dnsresolverhostoverride.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples
